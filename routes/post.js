@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { crossOriginResourcePolicy } = require('helmet');
 const Post = require('../models/Post');
+const User = require('../models/User');
 
 // CREATE POST
 router.post('/', async (req, res) => {

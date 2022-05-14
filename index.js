@@ -9,6 +9,8 @@ const userRoute = require("./routes/user")
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/post");
 
+var cors = require('cors');
+
 // connections
 dotenv.config();
 mongoose 
@@ -23,7 +25,7 @@ mongoose
 app.use(express.json()); // based on (body-parser) used to parse requests
 app.use(helmet());
 app.use(morgan("common"));
-
+app.use(cors());
 
 app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);

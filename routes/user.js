@@ -7,6 +7,7 @@ router.get('/', function (req, res) {
     res.send("user route");
 });
 
+
 // UPDATE USER
 router.put('/:id', async (req, res) => {
     if (req.body.userId == req.params.id || req.body.isAdmin) {
@@ -49,7 +50,7 @@ router.delete('/:id', async (req, res) => {
 
 // GET A USER
 router.get('/:id', async (req, res) => {
-    if (req.body.userId === req.params.id || req.body.isAdmin) {
+    if (1){
         try {
             const user = await User.findById(req.params.id);
             res.status(200).json(user);
