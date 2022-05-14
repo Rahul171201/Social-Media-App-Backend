@@ -3,11 +3,6 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
 
-router.get('/', function (req, res) {
-    res.send("user route");
-});
-
-
 // UPDATE USER
 router.put('/:id', async (req, res) => {
     if (req.body.userId == req.params.id || req.body.isAdmin) {
@@ -49,18 +44,20 @@ router.delete('/:id', async (req, res) => {
 });
 
 // GET A USER
-router.get('/:id', async (req, res) => {
-    if (1){
-        try {
-            const user = await User.findById(req.params.id);
-            res.status(200).json(user);
-        } catch (err) {
-            res.status(500).json(err);
-        }
+router.get('/', async (req, res) => {
+
+    const userId = req.query.userId;
+    const username = req.query.username;
+    // console.log(userId);
+
+    try {
+        const user = userId ? await User.findById(req.query.userId) : await User.findOne({username : username});
+        // console.log(user);
+        res.status(200).json(user);
+    } catch (err) {
+        res.status(500).json(err);
     }
-    else {
-        console.log("Unauthorized access");
-    }
+
 });
 
 // FOLLOW A USER
